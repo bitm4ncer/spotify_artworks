@@ -6,7 +6,7 @@ async function searchArtist() {
 
     const token = await getToken();
     const artistId = await getArtistId(artistName, token);
-    const albums = await getArtistAlbums(artistId, token);
+    const albums = await getAllArtistAlbums(artistId, token);
 
     displayAlbums(albums);
 }
@@ -39,15 +39,29 @@ async function getArtistId(artistName, token) {
     return data.artists.items[0].id;
 }
 
-async function getArtistAlbums(artistId, token) {
-    const response = await fetch(`https://api.spotify.com/v1/artists/${artistId}/albums`, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    });
+async function getAllArtistAlbums(artistId, token) {
+    let albums = [];
+    let offset = 0;
+    const limit = 50; // Max limit allowed by Spotify API
 
-    const data = await response.json();
-    return data.items;
+    while (true) {
+        const response = await fetch(`https://api.spotify.com/v1/artists/${artistId}/albums?offset=${offset}&limit=${limit}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        const data = await response.json();
+        albums = albums.concat(data.items);
+
+        if (data.items.length < limit) {
+            break;
+        }
+
+        offset += limit;
+    }
+
+    return albums;
 }
 
 function displayAlbums(albums) {
