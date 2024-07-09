@@ -3,6 +3,8 @@
 
 A simple web application to search and diplay all cover artworks of a Spotify Artist
 
+https://bitm4ncer.github.io/spotify_artworks/
+
 
 ## Features
 
