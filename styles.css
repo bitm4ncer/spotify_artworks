@@ -1,0 +1,45 @@
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    background: black;
+    color: white;
+}
+
+#searchInput {
+    padding: 10px;
+    font-size: 16px;
+}
+
+#searchButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+#results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.album {
+    margin: 10px;
+    text-align: center;
+}
+
+.album img {
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.album img:hover {
+    transform: scale(2);
+}
+
+.album-title {
+    margin-top: 5px;
+    font-size: 14px;
+}
